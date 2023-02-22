@@ -5,3 +5,9 @@ export const getPosts=(limit:number)=>{
         method: "Get"
     }).then((response) => response.json()).catch((err) => console.log(err))
 }
+
+export const getPostById=(id:string)=>{
+    return fetch(`${URL}api/posts/${id}`, {
+        method: "Get"
+    }).then((response) => response.json()).catch((err) => console.log(err))
+}

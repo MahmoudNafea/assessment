@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import moment from 'moment';
 
@@ -13,15 +14,15 @@ const CardComponent=({post}:any)=> {
       <Card.Body>
         <Card.Title>{post?.title}</Card.Title>
         <Card.Text>
-        {post.summary}
+        {post?.summary}
         </Card.Text>
         <Card.Text className='text-center' style={{ position: 'absolute', bottom: 60, left: 10, right: 10 }}>
-        <Card.Img variant="top" src={post.author.avatar} className="rounded-circle" style={{ width: 40, height: 40 }} />
-        {post.author.name}
+        <Card.Img variant="top" src={post?.author?.avatar} className="rounded-circle" style={{ width: 40, height: 40 }} />
+        {post?.author?.name}
         </Card.Text>
         <div  className='text-center' style={{position: 'absolute', bottom: 10, left: 10, right: 10 }}>
-          <Card.Text>{moment(post.publishDate).format('D MMM YYYY')}</Card.Text>
-          <Card.Link href="#">Details</Card.Link>
+          <Card.Text>{moment(post?.publishDate).format('D MMM YYYY')}</Card.Text>
+          <Link to={`posts/${post?.id}`} className="btn btn-outline-primary">Details</Link>
         </div>
       </Card.Body>
      </Card>

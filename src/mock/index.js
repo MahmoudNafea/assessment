@@ -7,7 +7,7 @@ createServer({
     this.namespace = 'api';
 
     this.get('/posts', (schema, request) => {
-      const limit = parseInt(request.queryParams.limit) || 5;
+      const limit = parseInt(request.queryParams.limit) || 6;
       // const page = request.queryParams.page || 1;
 
       // const startIndex = (page - 1) * limit;
@@ -19,5 +19,11 @@ createServer({
 
       // return { posts: result, total: data.length };
         });
+
+    this.get('/posts/:id', (schema, request) => {
+          const id = request.params.id;
+          return data.posts.find((post) => post.id === id);
+        });
+
   },
 });

@@ -9,7 +9,7 @@ const Home = () => {
   const [posts, setPosts] = useState<IPost[]>([]);
   const [categories, setCategories] = useState<ICategory[]>([])
 
-  const [limit, setLimit] = useState(9);
+  const [limit, setLimit] = useState(6);
 
   const getAllPosts = (limit:number) => {
     getPosts(limit)
@@ -51,9 +51,12 @@ const Home = () => {
               <CardComponent key={i} post={post}/>
             ))}
           </div>
-          {/* {loadMoreButton()} */}
+         
         </div>
       </div>
+      <div className='text-center'>
+          {loadMoreButton()}
+          </div>
       </div>
     </React.Fragment>
   );
