@@ -8,22 +8,16 @@ createServer({
 
     this.get('/posts', (schema, request) => {
       const limit = parseInt(request.queryParams.limit) || 6;
-      // const page = request.queryParams.page || 1;
+      const startIndex = parseInt(request.queryParams.skip) || 0;
 
-      // const startIndex = (page - 1) * limit;
-      // const endIndex = startIndex + limit;
+      const posts = data.posts.slice(startIndex, startIndex + limit);
 
-      // const result = data.slice(0, limit);
-
-      return data.posts.slice(0, limit);
-
-      // return { posts: result, total: data.length };
-        });
+      return { posts: posts, total: data.posts.length };
+    });
 
     this.get('/posts/:id', (schema, request) => {
-          const id = request.params.id;
-          return data.posts.find((post) => post.id === id);
-        });
-
+      const id = request.params.id;
+      return data.posts.find((post) => post.id === id);
+    });
   },
 });

@@ -8,15 +8,17 @@ import CheckboxesComponent from '../components/layout/checkbox';
 const Home = () => {
   const [posts, setPosts] = useState<IPost[]>([]);
   const [categories, setCategories] = useState<ICategory[]>([])
+  const [skip, setSkip] = useState(0)
+  const [total, setTotal] = useState(0)
+  const [limit, setLimit] = useState(10);
 
-  const [limit, setLimit] = useState(6);
-
-  const getAllPosts = (limit:number) => {
-    getPosts(limit)
+  const getAllPosts = () => {
+    getPosts(skip,limit)
       .then((data) => {
         console.log({ data });
         if (data) {
-          setPosts(data);
+          setPosts(data.posts);
+          setTotal(data.total)
         }
       })
       .catch((err) => {
@@ -25,16 +27,28 @@ const Home = () => {
   };
 
   useEffect(() => {
-    getAllPosts(limit);
+    getAllPosts();
   }, []);
 
-  const loadMore = () => {};
+  const loadMore = () => {
+    let toSkip = skip + limit
+    getPosts(toSkip,limit).then((data:any)=>{
+      if (data.error) {
+        console.log(data.error)
+    } else {
+        setPosts([...posts, ...data.posts])
+        setTotal(data.total)
+        setSkip(toSkip)
+    }
+    }).catch((err)=>console.log({err}))
+
+  };
 
   const loadMoreButton = () =>
-     (
+     (total > limit+skip &&(
       <Button onClick={loadMore} className="btn btn-warning mb-5">
         Load More
-      </Button>
+      </Button>)
     );
 
   return (
@@ -47,7 +61,7 @@ const Home = () => {
         </div>
         <div className="col-lg-9 col-12">
           <div className="row ">
-            {posts.map((post: IPost, i) => (
+            {posts?.map((post: IPost, i) => (
               <CardComponent key={i} post={post}/>
             ))}
           </div>
