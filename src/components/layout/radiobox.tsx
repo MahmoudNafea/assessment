@@ -7,7 +7,7 @@ const RadioboxesComponent=({ categories,filterHandle }: any)=> {
   return (
     <>
       {categories.map((category: any, i: any) => (
-        <div key={i}>
+        <div key={i} className="mb-2">
           <input
             name={category}
             onChange={handleChange}
