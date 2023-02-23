@@ -8,7 +8,7 @@ import RadioboxesComponent from '../components/layout/radiobox';
 import CardComponent from '../components/layout/card';
 
 //models
-import { ICategory, IPost } from '../models/posts';
+import { IPost } from '../models/posts';
 
 //service
 import { getAllCategories, getPosts } from '../utils/service';
