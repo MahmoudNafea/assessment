@@ -13,7 +13,7 @@ interface ICardProps {
   post: IPost;
 }
 
-const CardComponent=({post}: ICardProps)=> {
+const CardComponent=({post}: any)=> {
   return (
     <div style={{margin: '5px'}} className="col-lg-3 col-sm-12">
     <Card style={{ width: '21rem',height:'23rem' }}>
